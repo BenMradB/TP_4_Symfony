@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ArticlesController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="container">
+    <div class="mt-5">
+        <div class="mb-3">
+            <a href="/articles/create">
+                <button type="button" class="btn btn-primary">Create New Article</button>
+            </a> 
+        </div>
+        {% if articles %}
+            <table class="table">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Prix</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+            {% for article in articles %}
+                    <tbody>
+                        <tr>
+                            <th scope="row"> {{article.id}} </th>
+                            <td> {{article.name}} </td>
+                            <td> {{article.price}} </td>
+                            <td> 
+                                <a href="/articles/details/{{article.id}}">
+                                    <button type="button" class="btn btn-dark">Article Details</button>
+                                </a> 
+                                <a href="/articles/edit/{{article.id}}">
+                                    <button type="button" class="btn btn-success">Update Article</button>
+                                </a> 
+                                <a href="/articles/delete/{{article.id}}">
+                                    <button type="button" class="btn btn-danger">Delete Article</button>
+                                </a> 
+                            </td>
+                        </tr>
+                    </tbody>
+            {% endfor %}
+                </table>
+        {% else %}
+            <div class="alert alert-danger" role="alert">
+                No Articles Yet !!! 
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
